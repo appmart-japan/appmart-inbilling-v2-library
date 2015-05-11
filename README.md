@@ -7,4 +7,4 @@
 
 ## 導入手順
 
-導入手順は(https://gist.github.com/info-appmart/1204bf0595e5fe7b6667)[こちら]です。
+導入手順は [こちら](https://gist.github.com/info-appmart/1204bf0595e5fe7b6667)になります。
