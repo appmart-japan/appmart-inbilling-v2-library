@@ -372,6 +372,11 @@ public class AppmartIabHelper {
 	}
 	
 	
+	public void launchPurchaseFlow(final Activity act, final String sku,
+			final int requestCode, final OnIabPurchaseFinishedListener listener) {
+		launchPurchaseFlow(act,sku,requestCode, listener, "");
+	}
+	
 	 /**
      * Initiate the UI flow for an in-app purchase. Call this method to initiate an in-app purchase,
      * which will involve bringing up the appmart screen. The calling activity will be paused while
