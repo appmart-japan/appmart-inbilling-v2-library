@@ -10,6 +10,7 @@ public class SkuDetails {
 	String mTitle;
 	String mDescription;
 	String mJson;
+	String mPriceCurrencyCode;
 
 	/* constructor 1 */
 	public SkuDetails() {}
@@ -31,6 +32,8 @@ public class SkuDetails {
         mPrice = o.optString("price");
         mTitle = o.optString("title");
         mDescription = o.optString("description");
+        mPriceCurrencyCode = o.optString("price_currency_code");
+        
     }
     
     public String getSku(){
@@ -47,6 +50,10 @@ public class SkuDetails {
 
 	public String getDescription() {
 		return mDescription;
+	}
+	
+	public String getPriceCurrencyCode() {
+		return mPriceCurrencyCode;
 	}
 
     @Override
