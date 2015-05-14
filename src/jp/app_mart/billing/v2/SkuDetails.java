@@ -55,6 +55,10 @@ public class SkuDetails {
 	public String getPriceCurrencyCode() {
 		return mPriceCurrencyCode;
 	}
+	
+	public String getOriginalJson(){
+		return mJson;
+	}
 
     @Override
     public String toString() {
