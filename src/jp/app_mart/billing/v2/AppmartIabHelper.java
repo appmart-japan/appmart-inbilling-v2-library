@@ -575,7 +575,7 @@ public class AppmartIabHelper {
      * @param purchases The list of PurchaseInfo objects representing the purchases to consume.
      * @param listener The listener to notify when the consumption operation finishes.
      */
-    public void consumeAsync(List<Purchase> purchases, int vald, OnConsumeMultiFinishedListener listener) {
+    public void consumeAsync(List<Purchase> purchases, OnConsumeMultiFinishedListener listener) {
         checkSetupDone("consume");
         consumeAsyncInternal(purchases, null, listener);
     }
