@@ -78,11 +78,11 @@ interface InAppBillingV2Interface {
     /**
     * 同じサービスを購入する前に必ず購入を消費しなければなりません。
     * @param apiVersion アプリ内課金バージョン
-    * @param appId アプリID
+    * @param sku サービスID
     * @param licenceKey ライセンスキー
     * @param purchaseId 決済ID
     * @return 0=成功 、 その他=エラー
     */
-    int consumePurchase(int apiVersion, String appId, String licenceKey, String purchaseId);
+    int consumePurchase(int apiVersion, String sku, String licenceKey, String purchaseId);
      
 }
