@@ -1,10 +1,7 @@
-## appmart アプリ内課金 library (V2)
+# appmart アプリ内課金 library (V2)
 
 ![last-version](http://img.shields.io/badge/last%20version-1.1-green.svg "last version:1.1") 
 ![license apache 2.0](http://img.shields.io/badge/license-apache%202.0-brightgreen.svg "licence apache 2.0")
-
-
-# appmartアプリ内課金V2の実装
 
 ## V1対V2
 
