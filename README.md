@@ -25,7 +25,7 @@ appmartアプリ内課金V2はGoogle play IAB V3に合わせて作られたも�
 
 > プロジェクト URL : [https://github.com/appmart-japan/appmart-inbilling-v2-library] (https://github.com/appmart-japan/appmart-inbilling-v2-library)
 
-> サンプル URL : [https://github.com/appmart-japan/appmart-inbilling-v2-sample](https://github.com/appmart-japan/appmart-inbilling-v2-sample)
+> サンプル URL : [https://github.com/appmart-japan/appmart-inbilling-v2-sample] (https://github.com/appmart-japan/appmart-inbilling-v2-sample)
 
 ##### プロジェクトclone
 
