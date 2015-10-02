@@ -18,6 +18,8 @@ appmartアプリ内課金V2はGoogle play IAB V3に合わせて作られたも�
 
 # Plugin方式
 
+## 設定
+
 ![appmartアプリ内課金V2 :1.1](http://img.shields.io/badge/last%20version-1.1-green.svg "appmartアプリ内課金V2 :1.1") 
 ![license apache 2.0](http://img.shields.io/badge/license-apache%202.0-brightgreen.svg "licence apache 2.0")
 
@@ -27,7 +29,7 @@ appmartアプリ内課金V2はGoogle play IAB V3に合わせて作られたも�
 
 > サンプル URL : [https://github.com/appmart-japan/appmart-inbilling-v2-sample](https://github.com/appmart-japan/appmart-inbilling-v2-sample)
 
-##### プロジェクトclone
+### プロジェクトclone
 
 先ずはgithubプロジェクトをローカルでcloneしてください。
 
