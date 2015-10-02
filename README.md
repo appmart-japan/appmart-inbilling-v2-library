@@ -36,7 +36,7 @@ cd /home/user/your_directory
 git clone https://github.com/appmart-japan/appmart-inbilling-v2-library.git
 ```
 
-##### プロジェクトに追加 (eclipse)
+#### プロジェクトに追加 (eclipse)
 
 androidプロジェクトとしてworkspaceに導入します：
 
