@@ -161,7 +161,7 @@ AppmartIabHelper.QueryInventoryFinishedListener
 }
 ```
 
-#### サービス購入
+### サービス購入
 
 サービスを購入する際に、launchPurchaseFlowを使ってください。
 
@@ -225,10 +225,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-
-
-
-#### サービスを消費
+### サービスを消費
 
 Googleアプリ内課金V3同様に全てのサービスが管理されており、同じサービスを購入する前に必ず購入を消費しなければなりません。
 過去購入されたサービスを消費するにはConsumeメソッドを使ってください。
@@ -277,7 +274,7 @@ AppmartIabHelper.OnConsumeMultiFinishedListener onConsumeMultiFinishedListener =
 
 ## メソッド参照
 
-#### mHelper.queryInventoryAsync()
+### queryInventoryAsync()
 
 ```java
 mHelper.queryInventoryAsync(additionalSkuList, mQueryFinishedListener);
@@ -294,7 +291,7 @@ mHelper.queryInventoryAsync(additionalSkuList, mQueryFinishedListener);
 callbackの二つ目の引数は[inventory]オブジェクトです。inventoryで簡単に**過去購入**されたサービス（未消費）と指定された**サービス情報**を取得できます。詳細は[Inventoryクラス](https://github.com/appmart-japan/appmart-inbilling-v2-library/blob/master/src/jp/app_mart/billing/v2/Inventory.java)をご確認ください。
 
 
-#### mHelper.launchPurchaseFlow()
+### launchPurchaseFlow()
 
 ```java
 mHelper.launchPurchaseFlow(this,"service_id", 10001,mPurchaseFinishedListener,"test string");
@@ -310,7 +307,7 @@ mHelper.launchPurchaseFlow(this,"service_id", 10001,mPurchaseFinishedListener,"t
 | 4  |  OnIabPurchaseFinishedListener   |   決済完了後のcallback| 
 | 5  |  String   |   決済完了後にreturnされる値(任意)| 
 
-#### consumeAsync
+### consumeAsync()
 
 ```java 
 mHelper.consumeAsync(p, mConsumeFinishedListener);
@@ -335,7 +332,7 @@ mHelper.consumeAsync(p, mConsumeFinishedListener);
 ## 設定+サービス接続
 
 
-####  AIDLファイルの生成
+###  AIDLファイルの生成
 
 Appmartの課金システムサービスとやりとりするために、AIDLファイルを作成する必要があります。
  
@@ -437,7 +434,7 @@ interface InAppBillingV2Interface {
 
 > 必ず上記5つのメソッドを用意してください 。メソッドの引数・戻り値は【リファレンス】を参照してください。
 
-#### パーミッション追加
+### パーミッション追加
 
 appmartを利用するには下記permissionsを追加してください。
 
@@ -446,7 +443,7 @@ appmartを利用するには下記permissionsを追加してください。
 <uses-permission android:name="jp.app_mart.permissions.APPMART_BILLING" />
 ```
 
-#### ServiceConnectionを作成
+### ServiceConnectionを作成
 
 少なくとも以下の処理がアプリ内で必要です。
 
@@ -471,7 +468,7 @@ ServiceConnection mServiceConn = new ServiceConnection() {
 };
 ```
 
-#### Appmartとの連動
+### Appmartとの連動
  
 ActivityのonCreateメソッド内で、**bindService**メソッドを呼んでバインドします。メソッドには アプリ内課金サービスを参照するIntentおよびServiceConnectionのインスタンスを渡します。
  
@@ -503,7 +500,7 @@ public void onDestroy() {
 
 サービスが購入されると、ユーザーがそのサービスの**所有権**を取得したと認識し、そのサービスが**消費されるまで**同じプロダクトIDのサービスが購入されるのを防止します。アプリではサービスがどのように消費されるかをコントロールすることができ、appmartにそのサービスが**再度購入**できるようになったことを通知できます。また、ユーザーによって作成された購入リストをappmartから素早く取得することができます。例えば、ユーザーがアプリを起動したときにユーザーの購入リストをリストアしたときに便利です。
 
-#### 購入可能なサービス情報を問い合わせ
+### 購入可能なサービス情報を問い合わせ
 
 ユーザーの購入状況と関係なくappmartからサービスの詳細を問い合わせることができます。アプリ内課金V2サービスにリクエストを送るには、サービスIDの String ArrayList を作成し、それを "ITEM_ID_LIST" というキーで Bundle に保持します。 
 
@@ -525,7 +522,7 @@ Bundle skuDetails = mService.getSkuDetails(2, "application_id", "license_key", q
 
 リクエストが成功した場合、返ってきた Bundle には RESPONSE_CODE というキーで 0 が含まれます。 
 
-##### Response Code 一覧:
+### Response Code 一覧:
 
 | 値         | 備考    |
 |---|----------------|
@@ -557,7 +554,7 @@ if (response == 0) {
 }
 ```
 
-##### JSON項目一覧：
+### JSON項目一覧：
 
 | json項目 | 備考    |
 |---|----------------|
@@ -567,7 +564,7 @@ if (response == 0) {
 |description|サービス説明|
 |price_currency_code|通貨|
 
-#### サービス購入
+### サービス購入
 
 アプリから購入リクエストを開始するには、getBuyIntentメソッドを呼び出します。 第1引数にはアプリ内課金**version**の"2"、第2引数には呼び出し**アプリID**、第3引数には**サービス ID**、第4引数にはアプリのライセンスキー、第4引数には **developerPayload** 文字列を渡します。 developerPayload 文字列は、購入情報としてappmartから返してほしい付加的な引数を指定するのに使います。 
 
@@ -635,7 +632,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
  
  > セキュリティー向上のためdeveloperPayloadの文字列が以前に送った購入リクエストのものと一致するかチェックします。 
  
- #### 購入したサービスを問い合わせる
+ ### 購入したサービスを問い合わせる
  
  ユーザーによる購入情報を取得するには、アプリ内課金V2のgetPurchasesメソッドを呼び出します。第1引数には **アプリ内課金version**の "2"、第2引数には呼び出し**アプリのID**、第3引数には**ライセンスキー**を渡します。 
  
@@ -664,7 +661,7 @@ if (response == 0) {
 }
  ```
  
- #### 購入サービスの消費
+ ### 購入サービスの消費
  
  アプリ内課金V2を使って、appmartの購入されたサービスの所有権をトラックできます。一度サービスが購入されると、その所有権があると考えられappmartから購入できなくなります。appmart が再びサービスを購入可能にする前に、サービスの消費リクエストを送らなければなりません。 
 
