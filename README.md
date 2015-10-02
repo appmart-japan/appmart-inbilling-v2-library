@@ -38,7 +38,7 @@ cd /home/user/your_directory
 git clone https://github.com/appmart-japan/appmart-inbilling-v2-library.git
 ```
 
-#### プロジェクトに追加 (eclipse)
+### プロジェクトに追加 (eclipse)
 
 androidプロジェクトとしてworkspaceに導入します：
 
@@ -51,7 +51,7 @@ androidプロジェクトとしてworkspaceに導入します：
 
 ![Eclipse:appmart アプリ内課金V2](http://data.app-mart.jp/docs/dev/images/import-library-v2.gif "Eclipse:appmart アプリ内課金 V2")
 
-#### プロジェクトに導入
+### プロジェクトに導入
 
 libraryとしてプロジェクトを導入します：
 
@@ -62,7 +62,7 @@ libraryとしてプロジェクトを導入します：
 
 ![appmart V2:プロジェクトとしてインポート](http://data.app-mart.jp/docs/dev/images/import-as-project-v2.gif "appmart V2:プロジェクトとしてインポート")
 
-#### permission追加
+### permission追加
 
 appmartアプリ内課金V2を利用するには下記permissionsを追加してください。
 
@@ -77,7 +77,7 @@ appmartアプリ内課金V2を利用するには下記permissionsを追加して
 
 > 各メソッドの引数情報は[メソッド参照](https://gist.github.com/info-appmart/1204bf0595e5fe7b6667#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7)をご確認ください。
 
-#### helperインスタンス化
+### helperインスタンス化
 
 Helperクラスを**インスタンス化**します。
 
@@ -85,7 +85,7 @@ Helperクラスを**インスタンス化**します。
 AppmartIabHelper mHelper= new AppmartIabHelper(this, "your_application_id", "your_license_key");
 ```
 
-#### helper初期設定
+### helper初期設定
 
 **startSetup**メソッドでhelperの初期設定を行います。
 
@@ -117,7 +117,7 @@ public void onDestroy() {
 }
 ```
 
-#### Inventory取得
+### Inventory取得
 
 **inventory**を取得することによってエンドユーザーの**購入履歴**と**サービス情報**を取得することができます。
 Googleのアプリ内課金V3同様にqueryInventoryAsyncで情報を取得できます。（UIThreadでも呼び出し可能です）
