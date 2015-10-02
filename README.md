@@ -326,6 +326,8 @@ mHelper.consumeAsync(p, mConsumeFinishedListener);
 
 # AIDL方式
 
+## 設定
+
 ![appmartアプリ内課金V2 :1.1](http://img.shields.io/badge/last%20version-1.1-green.svg "appmartアプリ内課金V2 :1.1") 
 ![license apache 2.0](http://img.shields.io/badge/license-apache%202.0-brightgreen.svg "licence apache 2.0")
 
