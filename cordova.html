@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>appmart</title>
+
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/">
+                appmart
+                <small class="hidden-xs hidden-sm">
+                    アプリない課金 V2
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://appmart-japan.github.io/appmart-inbilling-v2-library/.">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="plugin.html">
+                                        Plugin方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="aidl.html">
+                                        AIDL方式
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="cordova.html">
+                                        Phonegap
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="cocos2d.html">
+                                        Cocos2d-x V3
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="phonegap">phonegapプラグイン</h1>
+<p>このプラグインをご利用いただければ、簡単に<a href="http://app-mart.jp">appmart</a>のアプリ内課金V2を実装することができます。 </p>
+<h2 id="appmartv2">APPMARTアプリ内課金V2を導入</h2>
+<p>先ずは<a href="https://github.com/appmart-japan/appmart-inbilling-v2-library">githubプロジェクト</a>をローカルにcloneしてください。</p>
+<pre><code class="language-shell">cd /home/user/your_directory
+git clone https://github.com/appmart-japan/appmart-inbilling-v2-library.git</code></pre>
+<h5 id="-eclipse">プロジェクトに追加 (eclipse)</h5>
+<p>androidプロジェクトとしてworkspaceに導入します：</p>
+<ul>
+<li>File</li>
+<li>Import</li>
+<li>Existing Android Code Into Workspace</li>
+<li>先ほどcloneしたプロジェクトを選択します。</li>
+</ul>
+<blockquote>
+<p><strong>注意点</strong>　Eclipseにうまく読み込まれないために、workspace以外のフォルダーにcloneしてください。</p>
+</blockquote>
+<p><img src="http://data.app-mart.jp/docs/dev/images/import-library-v2.gif" alt="Eclipse:appmart アプリ内課金V2" title="Eclipse:appmart アプリ内課金 V2" /></p>
+<h4 id="">プロジェクトに導入</h4>
+<p>libraryとしてプロジェクトを導入します：</p>
+<ul>
+<li>プロジェクトに右クリック　</li>
+<li>Properties </li>
+<li>Android</li>
+<li>Libraries  :  Add ([appmart-inbilling-as-project]を選択)</li>
+</ul>
+<p><img src="http://data.app-mart.jp/docs/dev/images/import-as-project-v2.gif" alt="appmart V2:プロジェクトとしてインポート" title="appmart V2:プロジェクトとしてインポート" /></p>
+<h2 id="phonegap-1">phonegapプラグインをインストール</h2>
+<p>githubからインストール可能です。</p>
+<pre><code>$ cordova plugin add https://github.com/appmart-japan/appmart-inbilling-v2-phonegap.git</code></pre>
+<h2 id="plugin">pluginの使い方</h2>
+<h4 id="-1">初期設定</h4>
+<p>html内にプラグインのjsファイルをインポートしてください。</p>
+<pre><code class="language-html">&lt;script type="text/javascript" src="appmart.js"&gt;&lt;/script&gt;</code></pre>
+<p>callbacksを用意し、<strong>deviceready</strong> イベントでプラグインの初期設定を行います。</p>
+<pre><code class="language-javascript">//appmart plugin
+var mp ;
+
+// Console callback
+var callback_console  = function(message) { 
+    console.log(message);  
+}        
+// Alert callback
+var callback_alert = function(message) { 
+    alert(message); 
+}
+
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    //初期設定
+    mp = cordova.require("appmart-plugin.appmart");
+    mp.start_setup('your_application_id','your_license_key',callback_console, callback_console);
+}</code></pre>
+<blockquote>
+<p>アプリIDとライセンスIDを直してください。</p>
+</blockquote>
+<h5 id="start_setup">start_setupのパラメータ</h5>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>型</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>文字列</td>
+<td>アプリID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>文字列</td>
+<td>ライセンスID</td>
+</tr>
+<tr>
+<td>3</td>
+<td>関数</td>
+<td>成功時callback</td>
+</tr>
+<tr>
+<td>4</td>
+<td>関数</td>
+<td>失敗時callback</td>
+</tr>
+</tbody>
+</table>
+<h4 id="inventory">Inventoryを取得</h4>
+<p><strong>inventory</strong>を取得することによってエンドユーザーの<strong>購入履歴</strong>と<strong>サービス情報</strong>を取得することができます。</p>
+<pre><code class="language-html">&lt;button value="settlement" onclick="get_inv()" &gt;Inventoryを取得&lt;/button&gt;
+&lt;div id="my_div"&gt;&lt;/div&gt;</code></pre>
+<pre><code class="language-javascript">
+//　Inventory取得のcallback
+var show_inv = function(inventory){
+
+    // サービスリスト(JSON)
+    var sku_details_list = inventory.skuDetails ;
+
+    // 所有権を持っているサービスリスト(JSON)
+    var purchases_list = inventory.purchases ;
+
+    // UI update
+    var div;            
+    var myNode = document.getElementById("my_div")
+
+    //既存ボタンを削除
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    //サービスリストをループ
+    for(var i=0; i &lt; sku_details_list.length; i++){
+
+        // サービス情報を取得
+        var service_json = JSON.parse(sku_details_list[i]);
+        var div = document.createElement("div");
+
+        // 購入ボタン
+        var btn = document.createElement("button");
+        var t = document.createTextNode(service_json.title+ "を購入");
+        btn.appendChild(t);
+        btn.setAttribute("onclick", "purchase('"+service_json.productId+"','my payload for phonegap')");
+        div.appendChild(btn);
+
+        // 消費ボタン
+        var btn2 = document.createElement("button");
+        var t2 = document.createTextNode(service_json.title+"を消費");
+        btn2.appendChild(t2);
+        btn2.setAttribute("onclick", "consume('"+service_json.productId+"')");
+        div.appendChild(btn2);
+
+       // UIにボタンを追加    
+       myNode.appendChild(div);                        
+    }
+
+}
+
+// Inventory情報を取得
+function get_inv(){
+    if (mp != null){
+        mp.query_inventory_async("my_service_1,my_service_2", show_inv, callback_alert);
+    }else{
+        console.log("appmart pluginが設定されておりません。");
+    }
+}
+</code></pre>
+<h5 id="query_inventory_async">query_inventory_asyncのパラメータ</h5>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>取得するサービスのID(文字列、[,]区切り)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>成功時callback (JS関数)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>失敗時callback (JS関数)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="inventoryjson">inventoryのJSON情報</h5>
+<pre><code class="language-javascript">{
+    "purchases": [
+        "{\"developerPayload\":\"xxx\",\"orderId\":\"xxxxxxxxxxx\",\"purchaseTime\":\"2015\\/05\\/24 07:14\",\"productId\":\"my_pruduct_id_1\"}",
+        "{\"developerPayload\":\"yyy\",\"orderId\":\"xxxxxxxxxxx\",\"purchaseTime\":\"2015\\/05\\/24 08:23\",\"productId\":\"my_product_id_2\"}"
+    ],
+    "skuDetails": [
+        "{\"title\":\"200コイン\",\"price\":\"￥99\",\"description\":\"200コインdescription\",\"price_currency_code\":\"JPY\",\"productId\":\"xxxxxx\"}",
+        "{\"title\":\"100コイン\",\"price\":\"￥800\",\"description\":\"100コイン　description\",\"price_currency_code\":\"JPY\",\"productId\":\"xxxxxx\"}"
+    ]
+}</code></pre>
+<blockquote>
+<p>[skuDetails]と[purchases]配列のデータがJSON形式の文字列となっておりますのでご注意ください。</p>
+</blockquote>
+<h4 id="-2">サービスを購入</h4>
+<p>サービスを購入する際に、launch_purchase_flowを使ってください。</p>
+<pre><code class="language-javascript">//サービス購入処理
+function purchase(sku_id, payload){
+    if (mp != null){
+        mp.launch_purchase_flow(sku_id,payload, callback_console, callback_console);
+    }else{
+        console.log("appmart pluginが設定されておりません。");
+    }
+}</code></pre>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>型</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>文字列</td>
+<td>購入希望のサービスID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>文字列</td>
+<td>デベロッパーに追加される文字列 (任意)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>関数</td>
+<td>成功時callback</td>
+</tr>
+<tr>
+<td>4</td>
+<td>関数</td>
+<td>失敗時callback</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>サービスを購入した後にはInventoryを更新するためにもう一度query_inventory_asyncを実行してください。</p>
+</blockquote>
+<h4 id="-3">サービス消費</h4>
+<p>Googleアプリ内課金V3同様に全てのサービスが管理されており、同じサービスを購入する前に必ず購入を消費しなければなりません。 過去購入されたサービスを消費するにはConsumeメソッドを使ってください。</p>
+<blockquote>
+<p>継続決済の場合は「消費」は不可能になります！</p>
+</blockquote>
+<pre><code class="language-javascript">function consume(sku_id){
+    if (mp != null){
+        mp.consume_async(sku_id, callback_console, callback_console);
+    }else{
+        console.log("appmart pluginが設定されておりません。");
+    }
+}</code></pre>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>型</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>文字列</td>
+<td>消費するサービスのID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>関数</td>
+<td>成功時callback</td>
+</tr>
+<tr>
+<td>3</td>
+<td>関数</td>
+<td>失敗時callback</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>サービスを消費した後にはInventoryを更新するためにもう一度query_inventory_asyncを実行してください。</p>
+</blockquote>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    By <a href="http://app-mart.jp" title="app-mart アプリ内課金">appmart</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

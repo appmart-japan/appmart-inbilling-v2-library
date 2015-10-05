@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>appmart</title>
+
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/">
+                appmart
+                <small class="hidden-xs hidden-sm">
+                    アプリない課金 V2
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="active">
+                                    <a href="http://appmart-japan.github.io/appmart-inbilling-v2-library/.">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="plugin.html">
+                                        Plugin方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="aidl.html">
+                                        AIDL方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="cordova.html">
+                                        Phonegap
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="cocos2d.html">
+                                        Cocos2d-x V3
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="appmart--library-v2">appmart アプリ内課金 library (V2)</h1>
+<p><img src="http://img.shields.io/badge/last%20version-1.1-green.svg" alt="last-version" title="last version:1.1" />
+<img src="http://img.shields.io/badge/license-apache%202.0-brightgreen.svg" alt="license apache 2.0" title="licence apache 2.0" /></p>
+<h2 id="v1v2">V1対V2</h2>
+<p>appmartアプリ内課金V2はGoogle play IAB V3に合わせて作られたものとなります。<em>Google play  IAB</em>同様に全てのサービスが管理されており、同じサービスを２回購入する場合は<strong>購入を「消費」しなければなりません</strong>。</p>
+<h2 id="">実装方法について</h2>
+<p>デベロッパーがServiceに接続し<strong>AIDLの各メソッドを実装する(AIDL方式)</strong>か<strong>ライブラリーを使う(Plugin方式)</strong>という二つの実装方法があります。androidのアプリ内課金に慣れていない方またはGoogle V3の経験を持っている方はHelper方式をおすすめします。完全にカスタマイズしたい方はAIDL方式をおすすめします。</p>
+<blockquote>
+<p>Phonegap/Cordovaユーザーの方は<a href="cordova.html">こちら</a></p>
+</blockquote>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    By <a href="http://app-mart.jp" title="app-mart アプリ内課金">appmart</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

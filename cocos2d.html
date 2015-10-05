@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>appmart</title>
+
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/">
+                appmart
+                <small class="hidden-xs hidden-sm">
+                    アプリない課金 V2
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://appmart-japan.github.io/appmart-inbilling-v2-library/.">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="plugin.html">
+                                        Plugin方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="aidl.html">
+                                        AIDL方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="cordova.html">
+                                        Phonegap
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="cocos2d.html">
+                                        Cocos2d-x V3
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="cocos2d-x-v3">Cocos2d-x V3</h1>
+<p>appmartアプリ内課金システムのサンプルコードです。このサンプルをfork・cloneしていただき、自由にご利用ください。<br />
+このサンプルの対象サービスは  </p>
+<ul>
+<li>アプリ内課金：都度決済  </li>
+</ul>
+<h2 id="ready-to-use">Ready-to-useサンプル</h2>
+<h3 id="clone3">本リポジトリをcloneし、3つのパラメータを修正してください</h3>
+<h4 id="clone">サンプルをclone</h4>
+<pre><code>cd /home/your/mydirectory  
+git clone https://github.com/info-appmart/appmart-inbilling-v2-cocos2dx-sample.git</code></pre>
+<h4 id="">プロジェクトのパラメータを修正</h4>
+<blockquote>
+<p>/ proj.android / src / org / cocos2dx / cpp / SamplePaymentActivity.java  </p>
+<pre><code class="language-java">// アプリ情報
+private static final String APPMART_APP_ID = "your appId";
+private static final String APPMART_LICENSE_KEY = "your licenseKey";
+private static final String APPMART_SERVICE = "your servuce";</code></pre>
+</blockquote>
+<h3 id="appmartv2clone">appmartアプリ内課金V2をcloneし、導入してください</h3>
+<h4 id="appmartv2clone-1">appmartアプリ内課金V2をclone</h4>
+<pre><code>cd /home/your/mydirectory  
+git clone https://github.com/appmart-japan/appmart-inbilling-v2-library.git</code></pre>
+<h4 id="eclipse">プロジェクトに追加（eclipse）</h4>
+<p>androidプロジェクトとしてworkspaceに導入します：  </p>
+<ul>
+<li>File  </li>
+<li>Inport  </li>
+<li>Existing Android Code Into Workspace  </li>
+<li>
+<p>先ほどcloneしたプロジェクトを選択  </p>
+<p><strong>注意点</strong> 直接workspaceにcloneすると上手くインポートすることができないため、一度workspace以外のフォルダにcloneした上でインポートを行ってください。  </p>
+</li>
+</ul>
+<p><img src="http://s10.postimg.org/8zps7sord/Existing_Android_Code_Into_Workspace.png" alt="Existing Android Code Into Workspace" title="image1" />  </p>
+<h4 id="-1">プロジェクトに導入</h4>
+<p>libraryとしてプロジェクトを導入します：  </p>
+<ul>
+<li>プロジェクトを右クリック  </li>
+<li>Properties  </li>
+<li>Android  </li>
+<li>Libraries : Add（[appmart-inbilling-as-project]を選択）  </li>
+</ul>
+<p><img src="http://s13.postimg.org/ac5dite5j/Libraries_Add.png" alt="ProjectProperties-Libraries" title="image2" />  </p>
+<h2 id="-2">サンプルコード実装内容</h2>
+<blockquote>
+<p>下記javaの処理に関する詳しい内容は<a href="https://gist.github.com/info-appmart/1204bf0595e5fe7b6667">appmartアプリ内課金V2の実装</a>をご参照ください。  </p>
+</blockquote>
+<h3 id="-3">パーミッション追加</h3>
+<p>appmartアプリ内課金を利用するために、下記permissionを<code>/ proj.android / AndroidManifest.xml</code>に追加します。  </p>
+<pre><code>&lt;!-- 課金API用 --&gt;
+&lt;uses-permission android:name="jp.app_mart.permissions.APPMART_BILLING" /&gt;</code></pre>
+<h3 id="helper">Helper設定</h3>
+<p>第一引数にContext、第二引数にアプリのID、第三引数にアプリのライセンスキーを導入してください。  </p>
+<blockquote>
+<p>/ proj.android / src / org / cocos2dx / cpp / SamplePaymentActivity.java  </p>
+</blockquote>
+<pre><code class="language-java">static SamplePaymentActivity me = null;
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    me = this;
+}</code></pre>
+<pre><code class="language-java">mHelper = new AppmartIabHelper(me, APPMART_APP_ID, APPMART_LICENSE_KEY);
+mHelper.startSetup(new AppmartIabHelper.OnIabSetupFinishedListener() {
+    // 設定完了後呼ばれるcallback
+    @Override
+    public void onIabSetupFinished(IabResult result) {
+        if(!result.isSuccess()){
+            if(result.getResponse() == AppmartIabHelper.BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE)
+                me.debugMess("appmartを更新してください。");
+            Log.d("appmart", "appmartアプリ内課金：問題が発生しました。"+result);
+            return;
+        }else{
+            Log.d("appmart", "appmartアプリ内課金：設定完了");
+        }
+    }
+});</code></pre>
+<h3 id="inventory">Inventoryの取得</h3>
+<p>必要に応じ、listにサービスIDをaddで追加してください。  </p>
+<pre><code class="language-java">public static void requestSetInventory() {
+    List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    list.add(APPMART_SERVICE);
+    mHelper.queryInventoryAsync(list, new AppmartIabHelper.QueryInventoryFinishedListener() {
+        @Override
+        public void onQueryInventoryFinished(IabResult result,
+                Inventory inv) {
+            if (result.isFailure()) {
+                if (result.getResponse() == AppmartIabHelper.BILLING_RESPONSE_USER_NOT_LOG) {
+                    me.debugMess("appmartでログインしてください。");
+                } else {
+                    me.debugMess(result.getMessage());
+                }
+            }
+        }
+    });
+}</code></pre>
+<h3 id="-4">マーケット情報取得</h3>
+<p>マーケット情報を取得することで、googleとそれ以外のマーケットでの処理を分けることができます。  </p>
+<pre><code class="language-java">private static final String MARKET = "market";
+private static final int MARKET_TYPE_GOOGLE_PLAY = 1;
+private static final int MARKET_TYPE_OTHER = 2;</code></pre>
+<pre><code class="language-java">public static int getMarketType() {
+    SharedPreferences pref = PreferenceManager
+            .getDefaultSharedPreferences(SamplePaymentActivity.getContext());
+    int _market;
+    if ((!pref.contains(MARKET)) || pref.getInt(MARKET, 0) == 0) {
+        // マーケット情報の保存
+        PackageManager pm = SamplePaymentActivity.getContext()
+                .getPackageManager();
+        SharedPreferences.Editor edit = pref.edit();
+        String installationSource = pm
+                .getInstallerPackageName(Cocos2dxActivity.getContext()
+                        .getPackageName());
+
+        if (installationSource != null
+                &amp;&amp; installationSource.equals("com.android.vending")) {
+            Log.d("DEBUG", "google Play(c)からインストールされました。");
+            edit.putInt(MARKET, MARKET_TYPE_GOOGLE_PLAY);
+        } else {
+            Log.d("DEBUG", "google Play(c)以外のマーケットからインストールされました。");
+            edit.putInt(MARKET, MARKET_TYPE_OTHER);
+        }
+        edit.commit();
+    }
+    _market = pref.getInt(MARKET, 0);
+
+    return _market;
+}
+</code></pre>
+<h3 id="c">c++から決済画面の呼び出し</h3>
+<p>c++側からjniを用い、javaのメソッドを経由して決済画面へアクセスします。  </p>
+<pre><code class="language-cpp">// ---------------以下cppコード---------------
+USING_NS_CC;</code></pre>
+<p>ボタンを作成し、押した際にサービスの決済画面に遷移させるメソッドを呼び出します。  </p>
+<pre><code class="language-cpp">Size visibleSize = Director::getInstance()-&gt;getVisibleSize();
+Vec2 origin = Director::getInstance()-&gt;getVisibleOrigin();
+
+Sprite* autoConsumeButton1 = Sprite::create("AutoConsumeButton.png");
+Sprite* autoConsumeButton2 = Sprite::create("AutoConsumeButton.png");
+autoConsumeButton2-&gt;setColor(Color3B::BLUE);
+MenuItemSprite* autoConsumeButton = MenuItemSprite::create(
+        autoConsumeButton1, autoConsumeButton2,
+        CC_CALLBACK_1(SamplePayment::autoConsumePaymentService, this));
+autoConsumeButton-&gt;setPosition(
+        Vec2(origin.x + visibleSize.width * 1 / 2,
+                origin.y + visibleSize.height * 3 / 4));</code></pre>
+<p>サービスの消費するかどうかの情報を引数で渡します。  </p>
+<table>
+<thead>
+<tr>
+<th>int</th>
+<th>消費</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>自動で消費する</td>
+</tr>
+<tr>
+<td>2</td>
+<td>自動で消費しない</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-cpp">void SamplePayment::autoConsumePaymentService(cocos2d::Ref* pSender){
+    int CALL_SERVICE = 1;
+    sample::SampleNativeBridge::requestPaymentBridge(CALL_SERVICE);
+}</code></pre>
+<pre><code class="language-cpp">namespace sample {
+void SampleNativeBridge::requestPaymentBridge(int callService) {
+    requestPayment(callService);
+}
+}</code></pre>
+<p>jniを用い、javaのstaticメソッドを呼び出します。  </p>
+<pre><code class="language-cpp">#include "platform/android/jni/JniHelper.h"
+#define ACCESS_CLASS "org.cocos2dx.cpp.SamplePaymentActivity"
+
+extern "C" {
+void requestPayment(int callService){
+    cocos2d::JniMethodInfo jMInfo;
+    if(cocos2d::JniHelper::getStaticMethodInfo(jMInfo, ACCESS_CLASS, "requestPayment", "(I)V")){
+        jMInfo.env-&gt;CallStaticVoidMethod(jMInfo.classID, jMInfo.methodID, callService);
+        jMInfo.env-&gt;DeleteLocalRef(jMInfo.classID);
+    }
+}
+}</code></pre>
+<pre><code class="language-java">// ---------------以下javaコード---------------
+private static final int AUTO_CONSUME = 1;
+private static final int MANUAL_CONSUME = 2;</code></pre>
+<p>取得した<code>callService</code>の値により、サービスの自動消費を行うか判断します。  </p>
+<table>
+<thead>
+<tr>
+<th>int</th>
+<th>変数名</th>
+<th>消費</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>AUTO_CONSUME</td>
+<td>自動で消費する</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MANUAL_CONSUME</td>
+<td>自動で消費しない</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-java">public static void requestPayment(int callService) {
+    try{
+        if (callService == AUTO_CONSUME) {
+            me.buyService(APPMART_SERVICE, true);
+        } else if (callService == MANUAL_CONSUME) {
+            me.buyService(APPMART_SERVICE, false);
+        } else {
+            me.debugMess("サービスの購入に失敗しました。");
+        }
+    }catch(Exception e){
+        me.debugMess("エラーが発生しました。");
+        e.printStackTrace();
+    }
+}</code></pre>
+<p>boolean型の<code>autoFlg</code>により、自動で消費するかどうかの判断を行います。<br />
+<strong>※今回は<code>autoFlg==true</code>のため自動消費を行うこととします。</strong>  </p>
+<pre><code class="language-java">protected void buyService(String serviceId, boolean autoFlg) {
+    mHelper.launchPurchaseFlow(this, serviceId, 10001,
+            getIPFListener(autoFlg), "test string");
+}
+
+private OnIabPurchaseFinishedListener getIPFListener(final boolean autoFlg) {
+    // 決済完了後callback
+    AppmartIabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new AppmartIabHelper.OnIabPurchaseFinishedListener() {
+        @Override
+        public void onIabPurchaseFinished(IabResult result, Purchase info) {
+            if (result.isFailure()) {
+                Log.d(lTAG, "購入エラー：" + result);
+                return;
+            }
+            debugMess("サービスが購入されました（" + info.getSku() + "）");
+
+            if (autoFlg)
+                autoConsumeService(info);
+        }
+    };
+
+    return mPurchaseFinishedListener;
+}</code></pre>
+<p>自動消費のメソッド<code>autoConsumeService(Purchase)</code>が呼び出されたため、決済の後サービスの消費を行います。</p>
+<pre><code class="language-java">private void autoConsumeService(Purchase p) {
+    // 購入履歴をチェック
+    mHelper.consumeAsync(p, getCFListener());
+}</code></pre>
+<pre><code class="language-java">private AppmartIabHelper.OnConsumeFinishedListener getCFListener() {
+    // サービス消費後callback
+    AppmartIabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new AppmartIabHelper.OnConsumeFinishedListener() {
+        @Override
+        public void onConsumeFinished(Purchase purchase, IabResult result) {
+            if (result.isFailure()) {
+                debugMess("サービスが消費されませんでした。");
+            } else {
+                debugMess("サービスが消費されました");
+            }
+        }
+    };
+
+    return mConsumeFinishedListener;
+}</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    By <a href="http://app-mart.jp" title="app-mart アプリ内課金">appmart</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

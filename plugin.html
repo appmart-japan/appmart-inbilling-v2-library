@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>appmart</title>
+
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://appmart-japan.github.io/appmart-inbilling-v2-library/">
+                appmart
+                <small class="hidden-xs hidden-sm">
+                    アプリない課金 V2
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://appmart-japan.github.io/appmart-inbilling-v2-library/.">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="plugin.html">
+                                        Plugin方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="aidl.html">
+                                        AIDL方式
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="cordova.html">
+                                        Phonegap
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="cocos2d.html">
+                                        Cocos2d-x V3
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="plugin">Plugin方式</h1>
+<p><img src="http://img.shields.io/badge/last%20version-1.1-green.svg" alt="appmartアプリ内課金V2 :1.1" title="appmartアプリ内課金V2 :1.1" />
+<img src="http://img.shields.io/badge/license-apache%202.0-brightgreen.svg" alt="license apache 2.0" title="licence apache 2.0" /></p>
+<p>デベロッパーのローカル環境にプロジェクトをダウンロードしていただき、libraryとして参照します。</p>
+<blockquote>
+<p>プロジェクト URL : <a href="https://github.com/appmart-japan/appmart-inbilling-v2-library"><a href="https://github.com/appmart-japan/appmart-inbilling-v2-library">https://github.com/appmart-japan/appmart-inbilling-v2-library</a></a></p>
+<p>サンプル URL : <a href="https://github.com/appmart-japan/appmart-inbilling-v2-sample"><a href="https://github.com/appmart-japan/appmart-inbilling-v2-sample">https://github.com/appmart-japan/appmart-inbilling-v2-sample</a></a></p>
+</blockquote>
+<h3 id="clone">プロジェクトclone</h3>
+<p>先ずはgithubプロジェクトをローカルでcloneしてください。</p>
+<pre><code class="language-shell">cd /home/user/your_directory
+git clone https://github.com/appmart-japan/appmart-inbilling-v2-library.git</code></pre>
+<h3 id="-eclipse">プロジェクトに追加 (eclipse)</h3>
+<p>androidプロジェクトとしてworkspaceに導入します：</p>
+<ul>
+<li>File</li>
+<li>Import</li>
+<li>Existing Android Code Into Workspace</li>
+<li>先ほどcloneしたプロジェクトを選択</li>
+</ul>
+<blockquote>
+<p><strong>注意点</strong>　Eclipseにうまく読み込まれないために、workspace以外のフォルダーにcloneしてください。</p>
+</blockquote>
+<p><img src="http://data.app-mart.jp/docs/dev/images/import-library-v2.gif" alt="Eclipse:appmart アプリ内課金V2" title="Eclipse:appmart アプリ内課金 V2" /></p>
+<h3 id="">プロジェクトに導入</h3>
+<p>libraryとしてプロジェクトを導入します：</p>
+<ul>
+<li>プロジェクトに右クリック　</li>
+<li>Properties </li>
+<li>Android</li>
+<li>Libraries  :  Add ([appmart-inbilling-as-project]を選択)</li>
+</ul>
+<p><img src="http://data.app-mart.jp/docs/dev/images/import-as-project-v2.gif" alt="appmart V2:プロジェクトとしてインポート" title="appmart V2:プロジェクトとしてインポート" /></p>
+<h3 id="permission">permission追加</h3>
+<p>appmartアプリ内課金V2を利用するには下記permissionsを追加してください。</p>
+<pre><code class="language-xml">&lt;!-- 課金API用 --&gt;
+&lt;uses-permission android:name="jp.app_mart.permissions.APPMART_BILLING" /&gt;</code></pre>
+<h2 id="helper">helper使用</h2>
+<p><a href="http://developer.android.com/training/in-app-billing/preparing-iab-app.html">Google play IAB V3のサンプル</a>同様にhelperが用意されており、簡単に<strong>サービス情報・購入情報の取得</strong>と<strong>購入処理</strong>と<strong>消費処理</strong>を実装することができます。</p>
+<blockquote>
+<p>各メソッドの引数情報は<a href="https://gist.github.com/info-appmart/1204bf0595e5fe7b6667#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7">メソッド参照</a>をご確認ください。</p>
+</blockquote>
+<h3 id="helper-1">helperインスタンス化</h3>
+<p>Helperクラスを<strong>インスタンス化</strong>します。</p>
+<pre><code class="language-java">AppmartIabHelper mHelper= new AppmartIabHelper(this, "your_application_id", "your_license_key");</code></pre>
+<h3 id="helper-2">helper初期設定</h3>
+<p><strong>startSetup</strong>メソッドでhelperの初期設定を行います。</p>
+<pre><code class="language-java">mHelper.startSetup(new AppmartIabHelper.OnIabSetupFinishedListener() {
+       //設定完了後呼ばれるcallback
+       public void onIabSetupFinished(IabResult result) {
+          if (!result.isSuccess()){
+              if(result.getResponse() == AppmartIabHelper.BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE)
+                  debugMess("appmartを更新してください。");                     
+              Log.d("appmart", "appmartアプリ内課金：問題が発生しました。" + result);
+          }else{
+              Log.d("appmart", "appmartアプリ内課金：設定完了");
+          }
+       }
+});</code></pre>
+<p>上記のコードで設定が完了になります。設定が完了した後に<strong>onIabSetupFinished</strong>(callback)が呼ばれます。</p>
+<p><strong>onDestroy</strong>メッソドでappmartのアプリ内課金serviceと切断します。</p>
+<pre><code class="language-java">@Override
+public void onDestroy() {
+   super.onDestroy();
+   if (mHelper != null) mHelper.dispose();
+   mHelper = null;
+}</code></pre>
+<h3 id="inventory">Inventory取得</h3>
+<p><strong>inventory</strong>を取得することによってエンドユーザーの<strong>購入履歴</strong>と<strong>サービス情報</strong>を取得することができます。
+Googleのアプリ内課金V3同様にqueryInventoryAsyncで情報を取得できます。（UIThreadでも呼び出し可能です）</p>
+<blockquote>
+<p>消費されたサービスは購入履歴に入りませんのでご注意ください !</p>
+</blockquote>
+<pre><code class="language-java">//取得したいサービスのID
+List&lt;String&gt; additionalSkuList = new ArrayList&lt;String&gt;();
+additionalSkuList.add("my_service_id_1");
+additionalSkuList.add("my_service_id_2");
+
+// Inventoryを取得
+mHelper.queryInventoryAsync(additionalSkuList, mQueryFinishedListener);
+
+// inventory取得後のcallback
+AppmartIabHelper.QueryInventoryFinishedListener 
+   mQueryFinishedListener = new AppmartIabHelper.QueryInventoryFinishedListener() {
+
+   //　Inventory取得後のcallback
+   public void onQueryInventoryFinished(IabResult result, Inventory inventory){
+        if (result.isFailure()) {
+          if(result.getResponse() == AppmartIabHelper.BILLING_RESPONSE_USER_NOT_LOG){
+        debugMess("appmartでログインしてください。");
+      }else{
+        debugMess(result.getMessage());
+      }
+        return;
+    }
+
+    // TODO UIを更新
+        String applePrice =  inventory.getSkuDetails("my_service_id_1").getPrice();
+
+    // 購入サービス情報取得
+    //Purchase purchases = inventory.getAllOwnedSkus();
+
+    // サービス情報の取得
+    //SkuDetails skus = inventory.getAllSkuDetails()
+
+   }
+}</code></pre>
+<h3 id="-1">サービス購入</h3>
+<p>サービスを購入する際に、launchPurchaseFlowを使ってください。</p>
+<pre><code class="language-java">mHelper.launchPurchaseFlow(this,"service_id", 10001,mPurchaseFinishedListener,"test string");
+
+// 決済完了後 callback
+AppmartIabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener 
+= new AppmartIabHelper.OnIabPurchaseFinishedListener() {
+
+    // 決済完了後 callback
+    public void onIabPurchaseFinished(IabResult result, Purchase purchase){
+        if (result.isFailure()) {
+             Log.d(TAG, "購入エラー: " + result);
+             return;
+        }
+
+        debugMess("サービスが購入されました (" + purchase.getSku() + ")");
+        // TODO UI更新
+    }
+};  </code></pre>
+<p>:warning: セキュリティー向上</p>
+<p>デベロッパーの秘密鍵で署名された<strong>決済ID</strong>が<strong>シグネチャ</strong>に入っております。シグネチャを使うことによって購入の有効性チェックが可能になります。javaでの実装の場合は<a href="https://github.com/appmart-japan/appmart-inbilling-v2-library/blob/master/src/jp/app_mart/billing/v2/Security.java">library</a>をご確認ください。</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>情報</th>
+<th>取得</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>決済ID</td>
+<td>purchase.getOrderId()</td>
+</tr>
+<tr>
+<td>2</td>
+<td>シグネチャ</td>
+<td>purchase.getSignature()</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>有効性チェックは外部サーバーでの実装をおすすめします。</p>
+</blockquote>
+<p>決済情報を正常に受け取るために下記のように<strong>onActivityResult</strong>を変更してください。</p>
+<pre><code class="language-java">@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }else {
+            Log.d(TAG, "onActivityResult handled by AppmartIabHelper.");
+        }   
+}</code></pre>
+<p>:warning: セキュリティー向上</p>
+<p>公開鍵を追加することによって、開発者の秘密鍵で署名された決済IDが確認されます。外部サーバーでの有効性チェックできない場合はおすすめします。</p>
+<pre><code class="language-java">@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (!mHelper.handleActivityResult(requestCode, resultCode, data, "YOUR_PUBLIC_KEY")) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }else {
+            Log.d(TAG, "onActivityResult handled by AppmartIabHelper.");
+        }   
+}</code></pre>
+<h3 id="-2">サービスを消費</h3>
+<p>Googleアプリ内課金V3同様に全てのサービスが管理されており、同じサービスを購入する前に必ず購入を消費しなければなりません。
+過去購入されたサービスを消費するにはConsumeメソッドを使ってください。</p>
+<blockquote>
+<p>継続決済の場合は「消費」は不可能になります！</p>
+</blockquote>
+<pre><code class="language-java">// inventoryで購入履歴をチェック
+if(mInventory.hasPurchase(entry.getSku())){
+    Purchase p = mInventory.getPurchase("my_service_id_1");
+    mHelper.consumeAsync(p, mConsumeFinishedListener);
+}else{
+    Log.d(mActivity.getClass().getSimpleName(), "未消費の情報がございません。");
+}
+
+// サービス消費後 callback
+AppmartIabHelper.OnConsumeFinishedListener onConsumeFinishedListener = new AppmartIabHelper.OnConsumeFinishedListener(){
+    @Override
+    public void onConsumeFinished(Purchase purchase,IabResult result) {     
+        if(result.isFailure()){
+            debugMess("サービスが消費されませんでした。");
+        }else{
+            debugMess("サービスが消費されました。");
+            //TODO UIを更新
+        }
+    }
+};</code></pre>
+<p>:warning: 複数のPurchasesを消費する場合は：</p>
+<pre><code class="language-java">
+if(inventory.getAllPurchases().size()&gt;0) {
+    mHelper.consumeAsync(inventory.getAllPurchases(), onConsumeMultiFinishedListener);
+}
+
+// サービス消費後 callback
+AppmartIabHelper.OnConsumeMultiFinishedListener onConsumeMultiFinishedListener = new AppmartIabHelper.OnConsumeMultiFinishedListener(){
+        @Override
+        public void onConsumeMultiFinished(List&lt;Purchase&gt; purchase, List&lt;IabResult&gt; result) {
+            debugMess("全てのアイテムが消費されました。");
+        }
+};</code></pre>
+<h2 id="-3">メソッド参照</h2>
+<h3 id="queryinventoryasync">queryInventoryAsync()</h3>
+<pre><code class="language-java">mHelper.queryInventoryAsync(additionalSkuList, mQueryFinishedListener);</code></pre>
+<blockquote>
+<p>Inventory情報を取得</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>型</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>List</td>
+<td>取得希望ItemのID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>QueryInventoryFinishedListener</td>
+<td>取得後のcallback</td>
+</tr>
+</tbody>
+</table>
+<p>callbackの二つ目の引数は[inventory]オブジェクトです。inventoryで簡単に<strong>過去購入</strong>されたサービス（未消費）と指定された<strong>サービス情報</strong>を取得できます。詳細は<a href="https://github.com/appmart-japan/appmart-inbilling-v2-library/blob/master/src/jp/app_mart/billing/v2/Inventory.java">Inventoryクラス</a>をご確認ください。</p>
+<h3 id="launchpurchaseflow">launchPurchaseFlow()</h3>
+<pre><code class="language-java">mHelper.launchPurchaseFlow(this,"service_id", 10001,mPurchaseFinishedListener,"test string");</code></pre>
+<blockquote>
+<p>決済を実行</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>型</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Activity</td>
+<td>Activity</td>
+</tr>
+<tr>
+<td>2</td>
+<td>String</td>
+<td>サービスID</td>
+</tr>
+<tr>
+<td>3</td>
+<td>String</td>
+<td>onActivityResult用のresponse_code</td>
+</tr>
+<tr>
+<td>4</td>
+<td>OnIabPurchaseFinishedListener</td>
+<td>決済完了後のcallback</td>
+</tr>
+<tr>
+<td>5</td>
+<td>String</td>
+<td>決済完了後にreturnされる値(任意)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="consumeasync">consumeAsync()</h3>
+<pre><code class="language-java">mHelper.consumeAsync(p, mConsumeFinishedListener);</code></pre>
+<blockquote>
+<p>過去購入されたサービスを消費</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>型</th>
+<th>参考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Purchase</td>
+<td>queryInventoryAsyncで取得したpurchase</td>
+</tr>
+<tr>
+<td>2</td>
+<td>OnConsumeFinishedListener</td>
+<td>消費完了後のcallback</td>
+</tr>
+</tbody>
+</table>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    By <a href="http://app-mart.jp" title="app-mart アプリ内課金">appmart</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
