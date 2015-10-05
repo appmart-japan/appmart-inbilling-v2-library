@@ -189,24 +189,21 @@ AppmartIabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
         // TODO UI更新
     }
 };  </code></pre>
-<p>:warning: セキュリティー向上</p>
+<h5 id="-2">セキュリティー向上</h5>
 <p>デベロッパーの秘密鍵で署名された<strong>決済ID</strong>が<strong>シグネチャ</strong>に入っております。シグネチャを使うことによって購入の有効性チェックが可能になります。javaでの実装の場合は<a href="https://github.com/appmart-japan/appmart-inbilling-v2-library/blob/master/src/jp/app_mart/billing/v2/Security.java">library</a>をご確認ください。</p>
 <table>
 <thead>
 <tr>
-<th>n</th>
 <th>情報</th>
 <th>取得</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
 <td>決済ID</td>
 <td>purchase.getOrderId()</td>
 </tr>
 <tr>
-<td>2</td>
 <td>シグネチャ</td>
 <td>purchase.getSignature()</td>
 </tr>
@@ -224,7 +221,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             Log.d(TAG, "onActivityResult handled by AppmartIabHelper.");
         }   
 }</code></pre>
-<p>:warning: セキュリティー向上</p>
+<h5 id="-3">セキュリティー向上</h5>
 <p>公開鍵を追加することによって、開発者の秘密鍵で署名された決済IDが確認されます。外部サーバーでの有効性チェックできない場合はおすすめします。</p>
 <pre><code class="language-java">@Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -234,7 +231,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             Log.d(TAG, "onActivityResult handled by AppmartIabHelper.");
         }   
 }</code></pre>
-<h3 id="-2">サービスを消費</h3>
+<h3 id="-4">サービスを消費</h3>
 <p>Googleアプリ内課金V3同様に全てのサービスが管理されており、同じサービスを購入する前に必ず購入を消費しなければなりません。
 過去購入されたサービスを消費するにはConsumeメソッドを使ってください。</p>
 <blockquote>
@@ -260,7 +257,7 @@ AppmartIabHelper.OnConsumeFinishedListener onConsumeFinishedListener = new Appma
         }
     }
 };</code></pre>
-<p>:warning: 複数のPurchasesを消費する場合は：</p>
+<h5 id="purchases">複数のPurchasesを消費する場合は：</h5>
 <pre><code class="language-java">
 if(inventory.getAllPurchases().size()&gt;0) {
     mHelper.consumeAsync(inventory.getAllPurchases(), onConsumeMultiFinishedListener);
@@ -273,7 +270,7 @@ AppmartIabHelper.OnConsumeMultiFinishedListener onConsumeMultiFinishedListener =
             debugMess("全てのアイテムが消費されました。");
         }
 };</code></pre>
-<h2 id="-3">メソッド参照</h2>
+<h2 id="-5">メソッド参照</h2>
 <h3 id="queryinventoryasync">queryInventoryAsync()</h3>
 <pre><code class="language-java">mHelper.queryInventoryAsync(additionalSkuList, mQueryFinishedListener);</code></pre>
 <blockquote>
@@ -282,19 +279,16 @@ AppmartIabHelper.OnConsumeMultiFinishedListener onConsumeMultiFinishedListener =
 <table>
 <thead>
 <tr>
-<th>n</th>
 <th>型</th>
 <th>参考</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
 <td>List</td>
 <td>取得希望ItemのID</td>
 </tr>
 <tr>
-<td>2</td>
 <td>QueryInventoryFinishedListener</td>
 <td>取得後のcallback</td>
 </tr>
@@ -309,34 +303,28 @@ AppmartIabHelper.OnConsumeMultiFinishedListener onConsumeMultiFinishedListener =
 <table>
 <thead>
 <tr>
-<th>n</th>
 <th>型</th>
 <th>参考</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
 <td>Activity</td>
 <td>Activity</td>
 </tr>
 <tr>
-<td>2</td>
 <td>String</td>
 <td>サービスID</td>
 </tr>
 <tr>
-<td>3</td>
 <td>String</td>
 <td>onActivityResult用のresponse_code</td>
 </tr>
 <tr>
-<td>4</td>
 <td>OnIabPurchaseFinishedListener</td>
 <td>決済完了後のcallback</td>
 </tr>
 <tr>
-<td>5</td>
 <td>String</td>
 <td>決済完了後にreturnされる値(任意)</td>
 </tr>
@@ -350,19 +338,16 @@ AppmartIabHelper.OnConsumeMultiFinishedListener onConsumeMultiFinishedListener =
 <table>
 <thead>
 <tr>
-<th>n</th>
 <th>型</th>
 <th>参考</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
 <td>Purchase</td>
 <td>queryInventoryAsyncで取得したpurchase</td>
 </tr>
 <tr>
-<td>2</td>
 <td>OnConsumeFinishedListener</td>
 <td>消費完了後のcallback</td>
 </tr>
